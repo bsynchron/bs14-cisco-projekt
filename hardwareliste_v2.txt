@@ -1,9 +1,8 @@
-1 * 1941
-2 * 2960-24TT
-1 * 2950-24
-8 * Generic PC -> HP Z2 Small Form Factior G4 Workstation https://store.hp.com/GermanyStore/Merch/Product.aspx?id=5JA35EA&opt=ABD&sel=WKS
-5 * Generic Cash Register -> Handel POS2 IBM Set Kassensystem 15 Zoll Touch https://www.megakassen.de/generalueberholt/kassensysteme/handel-pos2-ibm-set-kassensystem-15-zoll-touch
-3 * Generic Server -> 2* Fujitsu ETERNUS DX60 S4 1* PowerEdge R340  https://www.dell.com/de-de/work/shop/povw/poweredge-r340
-1 * Generic Printer -> Dell B2375dfw
-4 * Cisco AccessPoint -> 6 * Cisco 3602E https://www.cisco.com/c/en/us/products/collateral/wireless/aironet-3600-series/data_sheet_c78-686782.html (2 access points für das verwaltungs gebäude)
-5 * Generic Camera -> 5-Dome-System PLUS https://www.bascom-kameras.de/5-dome-system-plus-schwarz
+Router:         1 * 1941
+Switches:       2 * 2960-24TT + 1 * 2950-24
+Office PCs:     8 * HP Z2 Small Form Factor G4 Workstation
+Cash Register:  5 * Handel POS2 IBM Set Kassensystem 15 Zoll Touch
+Server Storage: 1 * Fujitsu ETernus DX60 S4
+Bladecenter:    1 * HP c7000 Bladecenter + 5 * HP ProLiant BL460c Gen8 (Blades that will run inside of the bladecenter)
+AccessPoints:   6 * Cisco 3602E
+Cameras:        1 * Bascom 5-Dome-System PLUS
