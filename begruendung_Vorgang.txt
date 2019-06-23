@@ -22,7 +22,7 @@ sufficient perfomance -> run multiple subnets
 Office PCs (HP Z2 Small Form Factior G4 Workstation):
 Small formfactor, low power consumption - lowers costs
 fast and reliable hardware
-windows is inclusive
+windows 10 pro is inclusive
 
 Cisco AccessPoints (Cisco 3602E):
 powerfull longrange AP
@@ -44,6 +44,22 @@ High definition in light and dark environments
 powerfull infra red camera
 discrete
 water/force resistant
+
+VW-SR-BS (HP c7000):
+high workload capacity
+virtualization
+on demand infrastructure
+upgradeable
+
+VW-SR-ST (Fujitsu ETERNUS DX60 S4):
+Fast / High capacity NAS
+fast ethernet connection
+upgradeable
+
+Blades (HP ProLiant BL460c Gen8):
+High RAM units
+lots of cores
+on demand
 
 
 Vorgang:
