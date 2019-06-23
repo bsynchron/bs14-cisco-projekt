@@ -2,7 +2,7 @@ Router:         1 * 1941
 Switches:       2 * 2960-24TT + 1 * 2950-24
 Office PCs:     8 * HP Z2 Small Form Factor G4 Workstation
 Cash Register:  5 * Handel POS2 IBM Set Kassensystem 15 Zoll Touch
-Server Storage: 1 * Fujitsu ETernus DX60 S4
+Server Storage: 1 * Fujitsu ETERNUS DX60 S4
 Bladecenter:    1 * HP c7000 Bladecenter + 5 * HP ProLiant BL460c Gen8 (Blades that will run inside of the bladecenter)
 AccessPoints:   6 * Cisco 3602E
 Cameras:        1 * Bascom 5-Dome-System PLUS
