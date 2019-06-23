@@ -71,4 +71,7 @@ start dns,IoT service on server
 connect end devices to switches
 configure switches
 configure dhcp / routing on router
+configure NAS
+configure core VMs
+set ip of important end devices
 enable dhcp on end devices
