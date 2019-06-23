@@ -1,0 +1,7 @@
+1. Go into the office disconnect and reconnect a pc - it should now have a new IP
+2. Try to ping 10.0.2.255 - This should return more than one result / atleast 10.0.2.1, 10.0.2.2
+3. Try to ping 10.0.3.2 - This should be possible
+4. Try to ping 10.0.4.2 - This should be possible aswell
+5. Open a webbrowser and enter "cameras.idea.com" as an URL - This should take you to your surveillance system
+6. Go into the store and connect to the guest wifi and ping 10.0.2.2, 10.0.3.2, 10.0.4.2 - this should NOT be possible!
+7. GO to a cash register and try to ping 10.0.2.2 and 10.0.4.2 - this should be possible

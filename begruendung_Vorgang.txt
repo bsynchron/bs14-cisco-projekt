@@ -1,0 +1,58 @@
+Begründung:
+
+VW-SR-CS01 (2960-24TT):
+Has gigabit ports for high bandwidth services while still retaining lots of fast ethernet ports -> lower costs but performance
+Connected to the switch in the selling room with a gigabit connection -> high bandwidth for cameras / handeling customer wifi connections
+gigabit ethernet connection to router -> everything goes to the router first
+cores witch is also a distribution switch on that floor -> reduces costs
+
+VW-EG-CS01 (2950-24):
+only has FastEthernet ports
+Only connected to VW-SR-CS01 via FastEthernet -> subnet wont generate lots of traffic / cost reduction
+
+VK-CS01 (2960-24TT):
+Gigabit port -> high bandwidth for camera system / customer wifi
+sufficient ports to handle all needed devices
+
+VW-SR-R01 (1941):
+Has internal servies such as dhcp
+Gigabit port -> handle all incomming traffic with ease
+sufficient perfomance -> run multiple subnets
+
+Office PCs (HP Z2 Small Form Factior G4 Workstation):
+Small formfactor, low power consumption - lowers costs
+fast and reliable hardware
+windows is inclusive
+
+Cisco AccessPoints (Cisco 3602E):
+powerfull longrange AP
+enough performace to handle customer workload
+stable connection
+
+VW-SR-(SEC01/DB01) (Fujitsu ETERNUS DX60 S4):
+high capacity
+fast and reliable storage
+futureproof
+
+VK-*-K (Handel POS2 IBM Set Kassensystem 15 Zoll Touch):
+network connection
+touchscreen
+integrated card reader
+
+VK-CAM* (5-Dome-System PLUS):
+High definition in light and dark environments
+powerfull infra red camera
+discrete
+water/force resistant
+
+
+Vorgang:
+
+placed down essential switches and connect them
+connect core switch to router
+connect server to core switch
+start dns,IoT service on server
+connect end devices to switches
+configure switches
+configure dhcp / routing on router
+enable dhcp on end devices

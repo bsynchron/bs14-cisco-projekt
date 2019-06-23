@@ -1,0 +1,181 @@
+# CREATE SUBINTERFACES on VW-SR-R01
+en                                      #enable cli
+conf t                                  #configuration mode
+int g0/0                                #select interface g0/0
+no ip add                               #remove assigned ip
+no shut                                 #always on
+
+int g0/0.2
+en dot1q 2                              #enable encapsulation
+ip add 10.0.2.1 255.255.255.0           #assign ip address + netmask
+desc vlan2_subinterface                 #add description
+
+int g0/0.3
+en dot1q 3
+ip add 10.0.3.1 255.255.255.0
+desc vlan3_subinterface
+
+int g0/0.4
+en dot1q 4
+ip add 10.0.4.1 255.255.255.0
+desc vlan4_subinterface
+
+int g0/0.5
+en dot1q 5
+ip add 10.0.5.1 255.255.255.0
+desc vlan5_subinterface
+
+#CONFIGURE VLANS/PORTS ON VW-SR-CS01
+
+en
+conf t
+vlan 2                                  #define new vlan
+name OFFICE                             #set name of new vlan
+vlan 3
+name SEC
+vlan 4
+name CR
+vlan 5
+name GUEST
+exit                                    #exit configuration
+
+int g0/1
+sw mode trunk                           #set port to trunk mode
+int g0/2
+sw mode trunk
+int f0/24
+sw mode trunk
+switchport trunk allowed vlan remove 5  #disallow vlan5 (GUEST) to use port / reach further into the vw subnet
+
+int f0/1
+sw access vlan 2                        #set port access
+int f0/2
+sw access vlan 3
+int f0/3
+sw access vlan 4
+int range f0/4-10                       #select a range of ports
+sw access vlan 2
+
+
+#CONFIGURE VLANS/PORTS ON VK-CS01
+en
+conf t
+vlan 2
+name OFFICE
+vlan 3
+name SEC
+vlan 4
+name CR
+vlan 5
+name GUEST
+
+int g0/1
+sw mode trunk
+
+int range f0/1-4
+sw access vlan 5
+int range f0/5-9
+sw access vlan 4
+int range f0/10-14
+sw access vlan 3
+
+
+#CONFIGURE VLANS/PORTS ON VW-EG-CS01
+en
+conf t
+vlan 2
+name OFFICE
+vlan 3
+name SEC
+vlan 4
+name CR
+vlan 5
+name GUEST
+
+int f0/24
+sw mode trunk
+
+int range f0/1-5
+sw access vlan 2
+
+
+
+CONFIGURE DHCP ON VW-SR-R01:
+en
+conf t
+ip dhcp pool vlan2                      #define new dhcp pool
+network 10.0.2.0 255.255.255.0          #define network range
+default-router 10.0.2.1                 #define default router -> subinterface g0/0.1
+dns-server 10.0.2.2                     #define default dns server
+exit
+
+ip dhcp pool vlan3
+network 10.0.3.0 255.255.255.0
+default-router 10.0.3.1
+dns-server 10.0.2.2
+exit
+
+ip dhcp pool vlan4
+network 10.0.4.0 255.255.255.0
+default-router 10.0.4.1
+dns-server 10.0.2.2
+exit
+
+ip dhcp pool vlan5
+network 10.0.5.0 255.255.255.0
+default-router 10.0.5.1
+dns-server 8.8.8.8                      #define different default dns server for guests
+exit
+
+ip dhcp excluded-address 10.0.2.1 10.0.2.10 #remove ip range from dhcp pool
+ip dhcp excluded-address 10.0.2.255         #remove broadcast address from dhcp pool
+ip dhcp excluded-address 10.0.3.1 10.0.3.10
+ip dhcp excluded-address 10.0.3.255
+ip dhcp excluded-address 10.0.4.1 10.0.4.10
+ip dhcp excluded-address 10.0.4.255
+ip dhcp excluded-address 10.0.5.1 10.0.5.10
+ip dhcp excluded-address 10.0.5.255
+
+
+CONFIGURE ROUTING ON VW-SR-R01:
+ip routing                                      #enable ip routing
+ip access-list extended VLAN5-GUEST             #define access-list for vlan routing
+deny ip 10.0.2.0 0.0.0.255 10.0.4.0 0.0.0.255   #deny routing to given ip range
+permit ip 0.0.0.0 0.0.0.0 any                   #allow routing towards the dhcp-service
+exit
+int g0/0.5
+ip access-group VLAN5-GUEST in                  #assign rule-set to subinterface
+exit
+
+ip access-list extended VLAN4-CR
+deny ip 10.0.3.0 0.0.0.255 any
+deny ip 10.0.5.0 0.0.0.255 any
+permit ip 10.0.4.0 0.0.0.255 any                #allow routing to given ip range with any package
+permit ip 10.0.2.0 0.0.0.255 any
+permit ip 0.0.0.0 0.0.0.0 any
+exit
+int g0/0.4
+ip access-group VLAN4-CR in
+exit
+
+ip access-list extended VLAN3-SEC
+deny ip 10.0.4.0 0.0.0.255 any
+deny ip 10.0.5.0 0.0.0.255 any
+permit ip 10.0.3.0 0.0.0.255
+permit ip 10.0.2.0 0.0.0.255
+permit ip 0.0.0.0 0.0.0.0 any
+exit
+int g0/0.3
+ip access-group VLAN3-SEC in
+exit
+
+ip access-list extended VLAN2-OFFICE
+deny ip 10.0.5.0 0.0.0.255 any
+permit ip 10.0.2.0 0.0.0.255 any
+permit ip 10.0.3.0 0.0.0.255 any
+permit ip 10.0.4.0 0.0.0.255 any
+permit ip 0.0.0.0 0.0.0.0 any
+exit
+int g0/0.2
+ip access-group VLAN2-OFFICE in
+exit
