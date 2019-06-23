@@ -50,9 +50,7 @@ switchport trunk allowed vlan remove 5  #disallow vlan5 (GUEST) to use port / re
 int f0/1
 sw access vlan 2                        #set port access
 int f0/2
-sw access vlan 3
-int f0/3
-sw access vlan 4
+sw access vlan 2
 int range f0/4-10                       #select a range of ports
 sw access vlan 2
 
