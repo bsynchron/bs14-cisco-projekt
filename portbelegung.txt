@@ -1,5 +1,6 @@
 #router
 VW-SR-R01 g0/0 -> VW-SR-CS01 g0/1
+VW-SR-R01 g0/1 -> DSL-Modem f0/1
 
 #serverraum switch
 VW-SR-CS01 g0/1 -> VW-SR-R01 g0/0

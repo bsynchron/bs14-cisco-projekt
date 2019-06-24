@@ -25,6 +25,10 @@ en dot1q 5
 ip add 10.0.5.1 255.255.255.0
 desc vlan5_subinterface
 
+int g0/1                                #interface towards DSL-Modem
+no shutdown
+ip address 10.10.10.10 255.255.255.0
+
 #CONFIGURE VLANS/PORTS ON VW-SR-CS01
 
 en
@@ -140,6 +144,7 @@ ip routing                                      #enable ip routing
 ip access-list extended VLAN5-GUEST             #define access-list for vlan routing
 deny ip 10.0.2.0 0.0.0.255 10.0.4.0 0.0.0.255   #deny routing to given ip range
 permit ip 0.0.0.0 0.0.0.0 any                   #allow routing towards the dhcp-service
+permit ip 10.10.10.10 0.0.0.0 any               #allow routing towrads DLS-Modem
 exit
 int g0/0.5
 ip access-group VLAN5-GUEST in                  #assign rule-set to subinterface
@@ -173,6 +178,7 @@ permit ip 10.0.2.0 0.0.0.255 any
 permit ip 10.0.3.0 0.0.0.255 any
 permit ip 10.0.4.0 0.0.0.255 any
 permit ip 0.0.0.0 0.0.0.0 any
+permit ip 10.10.10.10 0.0.0.0. any
 exit
 int g0/0.2
 ip access-group VLAN2-OFFICE in
